@@ -24,8 +24,8 @@ for i=1:1:18
     station_number(i)=sta(i);
 [P_all,P_recent]= StationTempObs_LinearTrend(station_number(i),RecentYear);
 
-p_all(i,:)=P_all
-p_recent(i,:)=P_recent
+p_all(i,:)=P_all;
+p_recent(i,:)=P_recent;
 end
 %% 3a. Plot a global map of station locations
 %Example code, showing how to plot the locations of all 18 stations
@@ -39,7 +39,12 @@ title('Locations of stations with observational temperature data')
 % Follow the model from 3a, now using the function scatterm rather than plotm
 %to plot symbols for all 18 stations colored by the rate of temperature
 %change from RecentYear to present (i.e. the slope of the linear trendline)
-%<--
+figure(2); clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+scatterm(lat,lon,15,'m.')
+title('Locations of stations with observational temperature data')
 
 %% Extension option: again using scatterm, plot the difference between the
 %local rate of temperature change (plotted above) and the global mean rate
