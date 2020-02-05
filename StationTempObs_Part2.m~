@@ -19,10 +19,10 @@ P_recent = NaN(length(sta),2);
 %Use a for loop to calculate the linear trend over both the full
 %observational period and the time from RecentYear (i.e. 1960) to today
 %using the function StationTempObs_LinearTrend
-for i=1:18
+for i=1:1:18
     station_number(i)=sta(i);
-[P_all,P_recent]= StationTempObs_LinearTrend(station_number(i),RecentYear);
 
+[P_all(i),P_recent(i)]= StationTempObs_LinearTrend(station_number(i),RecentYear);
 
 end
 %% 3a. Plot a global map of station locations
