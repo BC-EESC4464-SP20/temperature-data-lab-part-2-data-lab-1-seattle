@@ -13,17 +13,19 @@ load GlobalStationsLatLon.mat
 RecentYear = 1960; %you can see how your results change if you vary this value
 
 %Initialize arrays to hold slope and intercept values calculated for all stations
-P_all = NaN(length(sta),2); %example of how to do this for the full observational period
+p_all = NaN(length(sta),2); %example of how to do this for the full observational period
 %<-- do the same thing just for values from RecentYear to today
-P_recent = NaN(length(sta),2);
+p_recent = NaN(length(sta),2);
 %Use a for loop to calculate the linear trend over both the full
 %observational period and the time from RecentYear (i.e. 1960) to today
 %using the function StationTempObs_LinearTrend
-for i=1:18
+for i=1:1:18
+    
     station_number(i)=sta(i);
 [P_all,P_recent]= StationTempObs_LinearTrend(station_number(i),RecentYear);
 
-
+p_all(i,:)=P_all
+p_recent(i,:)=P_recent
 end
 %% 3a. Plot a global map of station locations
 %Example code, showing how to plot the locations of all 18 stations

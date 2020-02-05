@@ -29,7 +29,7 @@ function [P_all, P_recent] = StationTempObs_LinearTrend(station_number, RecentYe
 
 %% Read in the file for your station as a data table
 filename = [num2str(station_number) '.csv'];
-stationdata = readtable(filename);
+stationdata = readtable(filename);                                       
 
 %% Calculate the annual climatology
 % Extract the monthly temperature data from the table and store it in an
