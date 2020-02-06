@@ -4,7 +4,6 @@ function [baseline_model, P] = StationModelProjections(station_number)
 %===================================================================
 %
 % USAGE:  [OUTPUTS] = StationModelProjections(INPUTS) <--update here
-%
 % DESCRIPTION:
 %   **Add your description here**
 %
