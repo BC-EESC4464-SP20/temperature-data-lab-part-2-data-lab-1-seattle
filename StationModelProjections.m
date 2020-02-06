@@ -60,10 +60,11 @@ baseline_std= std(tempAnnMean(ind_baseline))
 %% Calculate the 5-year moving mean smoothed annual mean temperature anomaly over the modeled period
 % Note that you could choose to provide these as an output if you want to
 % have these values available to plot.
- %<-- anomaly
- %<-- smoothed anomaly
+tempAnnMeanAnomoly = tempAnnMean - baseline_mean
+tempAnnMeanSmooth= movmean(tempAnnMeanAnomaly,5)
+ 
 
 %% Calculate the linear trend in temperature this station over the modeled 21st century period
- %<--
+ P=polyfit(stationdata.year, tempAnnMeanAnomoly',1);
 
 end
