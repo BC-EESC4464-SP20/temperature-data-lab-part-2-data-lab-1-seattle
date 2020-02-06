@@ -54,9 +54,8 @@ tempAnnMean= mean(tempData')
 %  with both values called baseline_model
  %<-- (this will take multiple lines of code - see the procedure you
  %followed in Part 1 for a reminder of how you can do this)
-ind_baseline= find(stationdata.Year <= 2025 & stationdata.Year >= 2006)
-baseline_mean= mean(tempAnnMean(ind_baseline)
-baseline_std= std(tempAnnMean(ind_baseline))
+ind_baseline= find(stationdata.Year <== 2025 & stationdata.Year >=
+
 %% Calculate the 5-year moving mean smoothed annual mean temperature anomaly over the modeled period
 % Note that you could choose to provide these as an output if you want to
 % have these values available to plot.
