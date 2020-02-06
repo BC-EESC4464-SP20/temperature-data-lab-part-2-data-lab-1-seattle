@@ -3,9 +3,12 @@ function [baseline_model, P] = StationModelProjections(station_number)
 % StationModelProjections Analyze modeled future temperature projections at individual stations
 %===================================================================
 %
-% USAGE:  [OUTPUTS] = StationModelProjections(INPUTS) <--update here
+
+% USAGE:  [baseline_model, P] = StationModelProjections(station_number) 
+%
+
 % DESCRIPTION:
-%   **Add your description here**
+%   This function calculate the projected future rate of temperature change at each of the stations.  
 %
 % INPUT:
 %    staton_number: Number of the station from which to analyze historical temperature data
@@ -18,7 +21,7 @@ function [baseline_model, P] = StationModelProjections(station_number)
 %       values over the full 21st century modeled period
 %   **list any other outputs you choose to include**
 %
-% AUTHOR:   Add your names here!
+% AUTHORS: Luther vom Eigen and Kasey Cannon
 %
 % REFERENCE:
 %    Written for EESC 4464: Environmental Data Exploration and Analysis, Boston College
@@ -30,8 +33,10 @@ function [baseline_model, P] = StationModelProjections(station_number)
 
 %% Read and extract the data from your station from the csv file
 filename = ['model' num2str(station_number) '.csv'];
+stationdata = readtable(filename); 
 %Extract the year and annual mean temperature data
 %<--
+
 
 %% Calculate the mean and standard deviation of the annual mean temperatures
 %  over the baseline period over the first 20 years of the modeled 21st
