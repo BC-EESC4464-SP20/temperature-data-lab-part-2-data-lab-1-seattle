@@ -1,5 +1,5 @@
 %% Add a comment at the top with the names of all members of your group
-%Luther vom Eigen and Kasey Cannon
+% Kasey Cannon
 %% 1. Load in a list of all 18 stations and their corresponding latitudes and longitudes
 load GlobalStationsLatLon.mat
 

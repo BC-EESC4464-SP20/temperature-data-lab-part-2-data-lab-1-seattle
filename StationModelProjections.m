@@ -21,7 +21,7 @@ function [baseline_model, P] = StationModelProjections(station_number)
 %       values over the full 21st century modeled period
 %   **list any other outputs you choose to include**
 %
-% AUTHORS: Luther vom Eigen and Kasey Cannon
+% AUTHORS:Kasey Cannon
 %
 % REFERENCE:
 %    Written for EESC 4464: Environmental Data Exploration and Analysis, Boston College
