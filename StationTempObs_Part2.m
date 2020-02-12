@@ -66,7 +66,7 @@ title('Locations of stations with observational temperature data')
 %each station
 % Initialize arrays to hold all the output from the for loop you will write
 % below
-%<--
+
 
 % Write a for loop that will use the function StationModelProjections to
 % extract from the model projections for each station:
