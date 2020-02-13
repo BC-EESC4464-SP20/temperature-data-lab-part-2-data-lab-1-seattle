@@ -44,8 +44,8 @@ worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
 scatterm(lat,lon,150, p_recent(:,1),'filled')
-h=colorbar('southoutside')
-h.Label.String= 'ºC per decade','southoutside';
+h=colorbar('southoutside');
+h.Label.String= 'ºC per decade';'southoutside';
 title('Locations of stations with observational temperature data')
 
 %% Extension option: again using scatterm, plot the difference between the
@@ -68,6 +68,7 @@ title('Locations of stations with observational temperature data')
 % below
 P_grid = NaN(length(sta),2);
 baseline_grid = NaN(length(sta),2);
+tempAnnMeanAnomaly_grid = NaN(94,18);
 
 % Write a for loop that will use the function StationModelProjections to
 % extract from the model projections for each station:
@@ -77,11 +78,12 @@ baseline_grid = NaN(length(sta),2);
 for i=1:1:18
     
 
-[baseline_model,P] = StationModelProjections(station_number(i));
+[baseline_model,P,tempAnnMeanAnomaly,Year] = StationModelProjections(station_number(i));
 
 P_grid(i,:)=P;
 baseline_grid(i,:)=baseline_model;
 
+tempAnnMeanAnomaly_grid(:,i)=tempAnnMeanAnomaly;
 end
     
    
@@ -94,9 +96,13 @@ figure(3); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
-scatterm(lat,lon,90, P_grid(:,1).*10,'filled')
-h=colorbar('southoutside')
-h.Label.String= 'ºC per decade','southoutside';
+scatterm(lat,lon,120, P_grid(:,1).*10,'filled')
+mycolormap = customcolormap(linspace(0,1,11), {'#7f3c0a','#b35807','#e28212','#f9b967','#ffe0b2','#f7f7f5','#d7d9ee','#b3abd2','#8073a9','#562689','#2f004d'});
+colorbar('southoutside');
+colormap(mycolormap);
+axis off;
+%h=colorbar('southoutside');
+%h.Label.String= 'ºC per decade';'southoutside';
 title('Rate of projected temperature change from 2006 to 2099 (ºC per decade) ')
 
 
@@ -104,7 +110,16 @@ title('Rate of projected temperature change from 2006 to 2099 (ºC per decade) ')
 %% 6a. Plot a global map of the interannual variability in annual mean temperature at each station
 %as determined by the baseline standard deviation of the temperatures from
 %2005 to 2025
-%<--
+figure(4); clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+scatterm(lat,lon,120, baseline_grid(:,2),'filled')
+%colormap(autumn)
+h=colorbar('southoutside');
+h.Label.String= 'southoutside';
+title('Baseline innterannual variabilty(standard deviation of annual mean temperature, 2006-2025')
+
 
 %% 6b-c. Calculate the time of emergence of the long-term change in temperature from local variability
 %There are many ways to make this calcuation, but here we will compare the
@@ -116,7 +131,34 @@ title('Rate of projected temperature change from 2006 to 2099 (ºC per decade) ')
 %projections, calculated as the time (beginning from 2006) when the linear
 %temperature trend will have reached 2x the standard deviation of the
 %temperatures from the baseline period
-%<--
+
+year_grid = NaN(18,1);
+
+for i= 1:1:18 
+    
+    noise = 2*baseline_grid(i,2);
+    slope = P_grid(i,1);
+    intercept = P_grid(i,2);
+    
+    Year_calc = (((noise)-intercept)/slope);
+    
+    %I = find(tempAnnMeanAnomaly_grid(:,i) >= noise,1);
+    %station_year = Year(I);
+    
+    Year_round = round(Year_calc);
+    year_grid(i) = Year_round;
+    
+    
+end 
+
 
 %Plot a global map showing the year of emergence
-%<--
+
+figure(5); clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+scatterm(lat,lon,120, year_grid,'filled')
+%colormap(autumn)
+h=colorbar;
+title('Baseline innterannual variabilty(standard deviation of annual mean temperature, 2006-2025')

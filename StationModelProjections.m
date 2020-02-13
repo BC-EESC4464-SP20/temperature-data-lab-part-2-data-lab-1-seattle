@@ -1,10 +1,10 @@
-function [baseline_model, P] = StationModelProjections(station_number)
+function [baseline_model, P,tempAnnMeanAnomaly, Year] = StationModelProjections(station_number)
 
 % StationModelProjections Analyze modeled future temperature projections at individual stations
 %===================================================================
 %
 
-% USAGE:  [baseline_model, P] = StationModelProjections(station_number) 
+% USAGE:  [baseline_model, P, tempAnnMeanAnomaly] = StationModelProjections(station_number) 
 %
 
 % DESCRIPTION:
@@ -12,14 +12,13 @@ function [baseline_model, P] = StationModelProjections(station_number)
 %
 % INPUT:
 %    staton_number: Number of the station from which to analyze historical temperature data
-%    **Describe any other inputs you choose to include**
+%    
 %
 % OUTPUT:
 %    baseline_model: [mean annual temperature over baseline period
 %       (2006-2025); standard deviation of temperature over baseline period]
 %    P: slope and intercept for a linear fit to annual mean temperature
-%       values over the full 21st century modeled period
-%   **list any other outputs you choose to include**
+%   
 %
 % AUTHORS:Kasey Cannon
 %
@@ -76,6 +75,7 @@ baseline_model(:,2)= baseline_std;
 %% Calculate the 5-year moving mean smoothed annual mean temperature anomaly over the modeled period
 % Note that you could choose to provide these as an output if you want to
 % have these values available to plot.
+
 tempAnnMeanAnomaly = tempAnnMean - baseline_mean;
 
 tempAnnMeanSmooth= movmean(tempAnnMeanAnomaly,5);
