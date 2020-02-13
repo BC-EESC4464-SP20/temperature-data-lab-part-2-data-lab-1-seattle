@@ -1,7 +1,8 @@
 %% Add a comment at the top with the names of all members of your group
 % Kasey Cannon
 %% 1. Load in a list of all 18 stations and their corresponding latitudes and longitudes
-load GlobalStationsLatLon.mat 
+load GlobalStationsLatLon.mat
+
 %% 2. Calculate the linear temperature trends over the historical observation period for all 18 station
 % You will do this using a similar approach as in Part 1 of this lab, but
 % now implementing the work you did last week within a function that you
@@ -66,7 +67,7 @@ title('Locations of stations with observational temperature data')
 % Initialize arrays to hold all the output from the for loop you will write
 % below
 P_grid = NaN(length(sta),2);
-baseline_grid = NaN(length(sta),2);
+Baseline_grid = NaN(length(sta),2);
 
 % Write a for loop that will use the function StationModelProjections to
 % extract from the model projections for each station:
@@ -76,11 +77,10 @@ baseline_grid = NaN(length(sta),2);
 for i=1:1:18
     
 
-[baseline_model,P] = StationModelProjections(station_number(i));
+[baseline_model, P] = StationModelProjections(station_number)
 
-P_grid(i,:)=P;
 baseline_grid(i,:)=baseline_model;
-
+P_grid(i,:)=P;
 end
     
    
@@ -89,17 +89,6 @@ end
 
 %% 5. Plot a global map of the rate of temperature change projected at each station over the 21st century
 %<--
-figure(3); clf
-worldmap('World')
-load coastlines
-plotm(coastlat,coastlon)
-scatterm(lat,lon,80, P_grid(:,1),'filled')
-colormap(autumn);
-h=colorbar('southoutside')
-h.Label.String= 'ºC per decade','southoutside';
-title('Rate of projected temperature change from 2006 to 20099 (ºC per decade)')
-
-
 
 %% 6a. Plot a global map of the interannual variability in annual mean temperature at each station
 %as determined by the baseline standard deviation of the temperatures from
