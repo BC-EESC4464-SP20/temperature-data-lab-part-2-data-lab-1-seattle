@@ -32,8 +32,8 @@ function [baseline_model, P] = StationModelProjections(station_number)
 %==================================================================
 
 %% Read and extract the data from your station from the csv file
-filename = 'model61860.csv';
-%filename =['model' [num2str(station_number)] '.csv'];
+%filename = 'model61860.csv';
+filename =['model' [num2str(station_number)] '.csv'];
 
 stationdata = readtable(filename); 
 

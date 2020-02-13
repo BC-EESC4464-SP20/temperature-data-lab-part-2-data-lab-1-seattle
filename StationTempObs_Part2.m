@@ -34,6 +34,7 @@ load coastlines
 plotm(coastlat,coastlon)
 plotm(lat,lon,'m.','markersize',15)
 title('Locations of stations with observational temperature data')
+
 %% 3b. Make a global map of the rate of temperature change at each station
 % Follow the model from 3a, now using the function scatterm rather than plotm
 %to plot symbols for all 18 stations colored by the rate of temperature
@@ -42,7 +43,7 @@ figure(2); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
-scatterm(lat,lon,80, p_recent(:,1),'filled')
+scatterm(lat,lon,150, p_recent(:,1),'filled')
 h=colorbar('southoutside')
 h.Label.String= 'ºC per decade','southoutside';
 title('Locations of stations with observational temperature data')
@@ -93,11 +94,10 @@ figure(3); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
-scatterm(lat,lon,80, P_grid(:,1),'filled')
-colormap(autumn);
+scatterm(lat,lon,90, P_grid(:,1),'filled')
 h=colorbar('southoutside')
-h.Label.String= 'ºC per decade','southoutside';
-title('Rate of projected temperature change from 2006 to 20099 (ºC per decade)')
+h.Label.String= 'ºC','southoutside';
+title('Rate of projected temperature change from 2006 to 2099 ')
 
 
 
