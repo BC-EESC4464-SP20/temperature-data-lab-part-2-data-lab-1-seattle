@@ -94,10 +94,10 @@ figure(3); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
-scatterm(lat,lon,90, P_grid(:,1),'filled')
+scatterm(lat,lon,90, P_grid(:,1).*10,'filled')
 h=colorbar('southoutside')
-h.Label.String= 'ºC','southoutside';
-title('Rate of projected temperature change from 2006 to 2099 ')
+h.Label.String= 'ºC per decade','southoutside';
+title('Rate of projected temperature change from 2006 to 2099 (ºC per decade) ')
 
 
 

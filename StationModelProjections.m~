@@ -32,6 +32,7 @@ function [baseline_model, P] = StationModelProjections(station_number)
 %==================================================================
 
 %% Read and extract the data from your station from the csv file
+%filename = 'model61860.csv';
 filename =['model' [num2str(station_number)] '.csv'];
 
 stationdata = readtable(filename); 
@@ -44,8 +45,8 @@ tempData = table2array(stationdata(:,2));
 tempMean = nanmean(tempData);
 
 for i = 1:length(tempData)
-    
-    indnan = isnan(tempData(i)) == 1; 
+    indnan = find(isnan(tempData(:,i)) == 1);
+    indnan = isnan(tempData(i)) == 1); 
     
     tempData(i,indnan) = tempMean;
 end

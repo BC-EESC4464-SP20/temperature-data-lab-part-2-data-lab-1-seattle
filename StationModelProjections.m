@@ -46,9 +46,9 @@ tempMean = nanmean(tempData);
 
 for i = 1:length(tempData)
     
-    indnan = isnan(tempData(i)) == 1; 
+    indnan = find(isnan(tempData(i,:)) == 1);
     
-    tempData(i,indnan) = tempMean;
+    tempData(indnan) = tempMean;
 end
 
 tempAnnMean = tempData;
