@@ -54,8 +54,19 @@ title('Locations of stations with observational temperature data')
 %global mean temperature data in Part 1 of this lab).
 %Data visualization recommendation - use the colormap "balance" from the
 %function cmocean, which is a good diverging colormap option
-%<--
 
+
+
+difference = (p_recent(:,1)- P_glob(1,1))
+
+figure(3); clf
+worldmap('World')
+load coastlines
+plotm(coastlat,coastlon)
+scatterm(lat,lon,150, difference,'filled') 
+h=colorbar('southoutside');
+h.Label.String= 'ºC per decade';'southoutside';
+title('Locations of stations with observational temperature data')
 
 
 %% 4. Now calculate the projected future rate of temperature change at each of these 18 stations
@@ -91,7 +102,7 @@ end
   
 %% 5. Plot a global map of the rate of temperature change projected at each station over the 21st century
 %<--
-figure(3); clf
+figure(4); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
@@ -109,7 +120,7 @@ title('Rate of projected temperature change from 2006 to 2099 (ºC per decade) ')
 %% 6a. Plot a global map of the interannual variability in annual mean temperature at each station
 %as determined by the baseline standard deviation of the temperatures from
 %2005 to 2025
-figure(4); clf
+figure(5); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
@@ -135,9 +146,13 @@ year_grid = NaN(1,18);
 
 for i= 1:1:18 
     
-    signal = tempAnnMeanAnomaly_grid(i,:);
-    noise = baseline_grid(i,2)
-    I = find(signal/noise > 2,1)
+    %signal = tempAnnMeanAnomaly_grid(i,:);
+    
+    signal = P_grid(i,1).*Year + P_grid(i,2);
+   
+    noise = baseline_grid(i,2);
+    
+    I = find(signal/noise >= 2, 1);
     
     station_year=Year(I);
     
@@ -149,7 +164,7 @@ end
 
 %Plot a global map showing the year of emergence
 
-figure(5); clf
+figure(6); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
