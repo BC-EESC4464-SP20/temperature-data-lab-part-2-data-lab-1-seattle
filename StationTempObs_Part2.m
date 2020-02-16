@@ -45,8 +45,7 @@ load coastlines
 plotm(coastlat,coastlon)
 scatterm(lat,lon,150, p_recent(:,1),'filled')
 h=colorbar('southoutside');
-h.Label.String= 'ºC per decade';'southoutside';
-title('Locations of stations with observational temperature data')
+title('Rate of temperature change from 1960 to present(ºC per decade)')
 
 %% Extension option: again using scatterm, plot the difference between the
 %local rate of temperature change (plotted above) and the global mean rate
@@ -57,16 +56,17 @@ title('Locations of stations with observational temperature data')
 
 
 
-difference = (p_recent(:,1)- P_glob(1,1))
+difference = (p_recent(:,1)- P_glob(1,1));
 
 figure(3); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
 scatterm(lat,lon,150, difference,'filled') 
+cmap = cmocean('balance','pivot',0);
+colormap(cmap);
 h=colorbar('southoutside');
-h.Label.String= 'ºC per decade';'southoutside';
-title('Locations of stations with observational temperature data')
+title('Difference between local and global rate of temperature change from 1960 to present (ºC per decade)')
 
 
 %% 4. Now calculate the projected future rate of temperature change at each of these 18 stations
@@ -107,12 +107,13 @@ worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
 scatterm(lat,lon,120, P_grid(:,1).*10,'filled')
-mycolormap = customcolormap([0 .25 .5 .75 1], {'#9d0142','#f66e45','#ffffbb','#65c0ae','#5e4f9f'});
+cmap = cmocean('balance');
+V= [-1.5 1.5];
+caxis(V)
+colormap(cmap);
 colorbar('southoutside');
-colormap(mycolormap);
 axis off;
 h=colorbar('southoutside');
-h.Label.String= 'ºC per decade';'southoutside';
 title('Rate of projected temperature change from 2006 to 2099 (ºC per decade) ')
 
 
@@ -125,10 +126,9 @@ worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
 scatterm(lat,lon,120, baseline_grid(:,2),'filled')
-%colormap(autumn)
 h=colorbar('southoutside');
-h.Label.String= 'southoutside';
-title('Baseline innterannual variabilty(standard deviation of annual mean temperature, 2006-2025')
+
+title('Baseline interannual variabilty (standard deviation) of annual mean temperature, 2006-2025')
 
 
 %% 6b-c. Calculate the time of emergence of the long-term change in temperature from local variability
@@ -146,29 +146,29 @@ year_grid = NaN(1,18);
 
 for i= 1:1:18 
     
-    %signal = tempAnnMeanAnomaly_grid(i,:);
+    year_test = 1:93;
+  
     
-    signal = P_grid(i,1).*Year + P_grid(i,2);
+    signal = P_grid(i,1).*year_test,
    
     noise = baseline_grid(i,2);
     
-    I = find(signal/noise >= 2, 1);
+    I = find(signal>2*noise,1,'first');
     
-    station_year=Year(I);
+    station_year=year_test(I);
     
     year_grid(i)=station_year;
     
       
 end 
 
-
+Emerg_year= year_grid+2006;
 %Plot a global map showing the year of emergence
 
 figure(6); clf
 worldmap('World')
 load coastlines
 plotm(coastlat,coastlon)
-scatterm(lat,lon,120,year_grid,'filled')
-%colormap(autumn)
+scatterm(lat,lon,120,Emerg_year,'filled')
 h=colorbar;
 title('Year of emergence of temperature increase')
