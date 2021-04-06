@@ -88,7 +88,7 @@ tempAnnMeanAnomaly_grid = NaN(18,94);
 % 1) the mean and standard deviation of the baseline period
 % (2006-2025) temperatures, 2) the annual mean temperature anomaly, and 3)
 % the slope and y-intercept of the linear trend over the 21st century
-for i=1:1:18
+for i=1:18
     
 
 [baseline_model,P,tempAnnMeanAnomaly,Year] = StationModelProjections(station_number(i));
