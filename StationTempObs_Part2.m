@@ -23,9 +23,11 @@ for i=1:1:18
     station_number(i)=sta(i);
 [P_all,P_recent]= StationTempObs_LinearTrend(station_number(i),RecentYear);
 
-p_all(i,:)=P_all;
+p_all(:,i)=P_all;
 p_recent(i,:)=P_recent;
 end
+
+p_1=p_all(:,1)
 %% 3a. Plot a global map of station locations
 %Example code, showing how to plot the locations of all 18 stations
 figure(1); clf
